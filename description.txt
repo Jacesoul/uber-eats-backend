@@ -1,0 +1,4 @@
+### INTRODUCTION
+
+- nest g application
+- gitignore extension 설치
