@@ -13,3 +13,4 @@
 - autoSchemaFile: true로 설정하면 메모리에 schema.graphql파일이 생성된다.
 - InputType은 그저 하나의 object로 보면된다. argument로써 graphql에 전달하기 위한 용도이다. 
 - ArgsType은 기본적으로 하나의 object에 모든것을 담지 않고 GraphQl argument로 전달해 줄수 있도록 해준다.
+- npm i class-validator class-transformer
