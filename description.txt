@@ -14,3 +14,13 @@
 - InputType은 그저 하나의 object로 보면된다. argument로써 graphql에 전달하기 위한 용도이다. 
 - ArgsType은 기본적으로 하나의 object에 모든것을 담지 않고 GraphQl argument로 전달해 줄수 있도록 해준다.
 - npm i class-validator class-transformer
+
+- TypeORM은 Object Relational Mapping(객체 관계 매핑)이란 뜻이다. 
+- PostgreSQL 설치 
+- https://postgresapp.com/
+- Postico 설치 (데이터베이스 시각화 툴)
+- https://eggerapps.at/postico/
+- 데이터베이스 생성 => uber-eats
+- 데이터베이스 터미널에서 유저명과 비밀번호 변경 
+- \du; => 모든 유저확인 
+- ALTER USER 'jiwooseol' WITH PASSWORD '12345'
