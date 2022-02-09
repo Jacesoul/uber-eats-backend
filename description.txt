@@ -31,3 +31,10 @@
 - localhost로 연결이 되어있을때는 PostgreSQL가 패스워드를 물어보지 않는다.
 - synchronize: true는 TypeORM이 데이터베이스에 연결할때 데이터베이스를 모듈의 현재 상태로 마이그래에션한다는 뜻이다.
 - logging은 데이터베이스에서 무슨일이 일어나는지 콜솔에 표시하는것이다.
+- dotenv는 .env 파일에서 환경변수를 로드하는데 process.env."환경변수이름" 방식으로 그 변수에 접근할수 있다. 
+- NestJS는 configuration module이 있는데 dotenv의 최상위에서 실행이 된다. 
+- npm i --save @nestjs/config
+- ConfigModuleOptions의 isGlobal은 어플리케이션 어디서나 config 모듈에 접근할수 있다는것이다.
+- .env.test/ .env.dev / .env.prod 파일 생성
+- cross-env는 가상변수를 설정할수 있게 해주는데 MacOS, Windows, Linux에 관계없이 사용할수 있다. 
+- npm i cross-env
