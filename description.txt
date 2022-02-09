@@ -10,7 +10,7 @@
 - main.ts는 application을 실행시키기 위한 것이다. 그러니 모든것들은 결국에 AppModule로 import된다.
 - forRoot는 root module을 설정하는것이다. 이 경우에는 GraphQl이 forRoot에 해당한다.
 - GraphQl Query는 첫번째 argument로 function이 필요하다.   
-- autoSchemaFile: true로 설정하면 메모리에 schema.graphql파일이 생성된다.
+- autoSchemaFile: true로 설정하면 메모리에 sche ma.graphql파일이 생성된다.
 - InputType은 그저 하나의 object로 보면된다. argument로써 graphql에 전달하기 위한 용도이다. 
 - ArgsType은 기본적으로 하나의 object에 모든것을 담지 않고 GraphQl argument로 전달해 줄수 있도록 해준다.
 - npm i class-validator class-transformer
@@ -44,3 +44,7 @@
 - npm i joi
 - import * as Joi from 'joi'; 은 타입스크립트나 NestJS로 되어있지 않은 패키지를 import 하는 방법이다.
 - Joi 덕분에 환경변수 마저도 그 유효성 검사를 할수 있어서 앱을 돌릴때 더 좋은 보안을 제공한다.
+- TypeOrm의 Entity는 데이터베이스를에 저장되는 데이터의 형태를 보여주는 모델이다. 
+- Entity는 DB table(MongoDB를 사용하는 경우 collection)에 매핑되는 클래스이다.
+- ObjectType은 자동으로 스키마를 빌드하기 위해 사용하는 GraphQl decorator이다.
+- ObjectType과 Entity는 같이 사용될수 있다.
