@@ -1,3 +1,4 @@
+import { CreateRestaurantDto } from './dtos/create-restaurant.dto';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Restaurant } from './entities/restaurant.entity';
 
@@ -11,11 +12,9 @@ export class RestaurantResolver {
 
   @Mutation((returns) => Boolean)
   createRestaurant(
-    @Args('name') name: string,
-    @Args('isVegan') isVegan: boolean,
-    @Args('address') address: string,
-    @Args('ownerName') ownerName: string,
+    @Args('createRestaurantInput') createRestaurantInput: CreateRestaurantDto,
   ): boolean {
+    console.log(createRestaurantInput);
     return true;
   }
 }
