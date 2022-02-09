@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,6 +12,14 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
       isGlobal: true,
       envFilePath: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.test',
       ignoreEnvFile: process.env.NODE_ENV === 'prod  ',
+      validationSchema: Joi.object({
+        NODE_ENV: Joi.string().valid('dev', 'prod').required(),
+        DB_HOST: Joi.required(),
+        DB_PORT: Joi.required(),
+        DB_USERNAME: Joi.required(),
+        DB_PASSWORD: Joi.required(),
+        DB_NAME: Joi.required(),
+      }),
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true,
