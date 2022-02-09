@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 
@@ -9,6 +10,16 @@ import { RestaurantsModule } from './restaurants/restaurants.module';
       autoSchemaFile: true,
     }),
     RestaurantsModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'jiwooseol',
+      password: '12345',
+      database: 'uber-eats',
+      synchronize: true,
+      logging: true,
+    }),
   ],
   controllers: [],
   providers: [],
