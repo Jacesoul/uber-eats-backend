@@ -2,3 +2,10 @@
 
 - nest g application
 - gitignore extension 설치
+
+### GraphQl API
+
+- npm i @nestjs/graphql graphql@^15 apollo-server-express
+- app.module.ts는 main.ts로 import되는 유일한 모듈이다. 
+- main.ts는 application을 실행시키기 위한 것이다. 그러니 모든것들은 결국에 AppModule로 import된다.
+- forRoot는 root module을 설정하는것이다. 이 경우에는 GraphQl이 forRoot에 해당한다.
