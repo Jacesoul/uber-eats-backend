@@ -48,3 +48,9 @@
 - Entity는 DB table(MongoDB를 사용하는 경우 collection)에 매핑되는 클래스이다.
 - ObjectType은 자동으로 스키마를 빌드하기 위해 사용하는 GraphQl decorator이다.
 - ObjectType과 Entity는 같이 사용될수 있다.
+- Data Mapper에서는 Repository라는것을 사용한다. Repository는 Entity랑 상호작용하는것을 담당한다.
+- Data Mapper는 유지관리하는것을 도와주고 대규모 앱에서 유용하다.
+- Active Record는 소규모 앱에서 단순하게 사용할 수 있도록 도와준다.
+- NestJS 어플리케이션에서 Data Mapper를 사용하려는 이유는 Nest+TypeORM 개발환경에서 Repository를 사용하는 모듈을 쓸수 있기 때문이다. 
+- Repository를 사용하면 어디서든지 접근할수가 있다. 실제로 구현하는 서비스에서도 접근이 가능하고 테스팅할 때도 접근이 가능하다.
+- Data Mapper 패턴을 이용해서 Repository를 test하고 simulate해볼 수 있다.
