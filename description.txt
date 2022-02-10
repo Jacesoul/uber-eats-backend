@@ -91,3 +91,7 @@
 - sign의 첫번째 인자에는 중요한 정보를 넣지 않고 어떤 회원인지 알수 있는 id를 넣는게 좋다.
 - privateKey를 이용해서 token을 지정해주는 목적은 사용자가 token을 수정했는지 확인할수 있기 때문이다. 
 - Config module을 설치 및 설정하고 configService를 요청하게 되면 nestjs가 이미 configModule의 존재를 인지하고 필요한 정보를 전달해준다. 그저 constructor에서 요청하기만 하면 된다.
+- dependency injection은 우리가 원하는 것의 class만 적어주면 nestjs가 그 정보를 가져다준다.
+- jsonwebtoken을 사용하는 이유는 만들고 있는 서비스만의 유효한 인증을 할수있게 하는것이다.(내부에 담겨진 정보자체가 아닌, 정보의 진위여부가 중요하다)
+- Module에는 static모듈과 dynamic 모듈이 있다.
+- dynamic모듈은 설정이 적용되어 있는 모듈이다. static모듈은 어떤한 설정도 적용되어 있지 않다.
