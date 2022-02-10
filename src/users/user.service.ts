@@ -6,6 +6,7 @@ import * as jwt from 'jsonwebtoken';
 import { User } from './entities/user.entity';
 import { LoginInput } from './dtos/login.dto';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from 'src/jwt/jwt.service';
 
 @Injectable()
 export class UserService {
@@ -13,7 +14,10 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly config: ConfigService,
-  ) {}
+    private readonly jwtService: JwtService,
+  ) {
+    console.log(this.jwtService.hello());
+  }
 
   async createAccount({
     email,
