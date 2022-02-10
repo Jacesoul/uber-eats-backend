@@ -29,8 +29,4 @@ export class Restaurant {
   @Field((type) => String, { defaultValue: 'jace' })
   @Column()
   ownerName: string;
-
-  @Field((type) => String)
-  @Column()
-  categoryName: string;
 }
