@@ -1,3 +1,4 @@
+import { LoginInput, LoginOutput } from './dtos/login.dto';
 import {
   CreateAccountInput,
   CreateAccountOutput,
@@ -39,4 +40,7 @@ export class UserResolver {
       };
     }
   }
+
+  @Mutation((returns) => LoginOutput)
+  async login(@Args('input') loginInput: LoginInput): Promise<LoginOutput> {}
 }
