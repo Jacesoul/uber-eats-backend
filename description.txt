@@ -113,3 +113,9 @@
 - app.use()에는 functional middleware만 넣을수 있다.
 - class 미들웨어를 사용하려면 app.module.ts에서 해야한다.
 - 무언가를 inject하고 싶다면 꼭 @Injectable()을 사용해야한다.
+- jwt 미들웨어의 request를 graphql로 공유해야한다.
+- 이 request는 HTTP request인데 이걸 graphql resolver에 전달해야한다.
+- 이것을 구현하기 위해서 graphql module이 apollo server에서 모든걸 가져와 사용할수 있다는것을 알아야한다.
+- apollo server에는 context라는 property가 존재하는데 context는 각 request에서 사용이 가능하다.
+- context는 함수로 정의되고 request마다 매번 호출되며 req property를 가진 object를 받는다.
+- context에 property를 넣으면 graphql resolver에서 사용할수있다.
