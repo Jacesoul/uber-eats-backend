@@ -96,3 +96,10 @@
 - Module에는 static모듈과 dynamic 모듈이 있다.
 - dynamic모듈은 설정이 적용되어 있는 모듈이다. static모듈은 어떤한 설정도 적용되어 있지 않다.
 - dynamic모듈은 또 다른 module을 반환해주는 모듈이다.
+- providers: [JwtService]는 사실 아래의 코드의 축소형이다. 
+- providers: [
+          {
+            provide: JwtService,
+            useClass: JwtService,
+          },
+        ],
