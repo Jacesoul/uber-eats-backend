@@ -109,3 +109,7 @@
 - implements는 class가 interface처럼 행동해야한다는 것이다.
 - NestModule에서 configure의 consumer는 사용자가 정의한 미들웨어를 routes에 적용하는 방법을 정의해주는 interface이다. 
 - 미들웨어를 정확히 어떤 routes에 적용하고 싶은지 지정하려면 forRoutes를 적용하면 된다. 제외하고 싶은 routes가 있다면 exclude메소드를 사용하면 된다.
+- Repository 혹은 class, dependency injection을 사용해야할때 미들웨어를 app.use()에 넣을수가 없다.
+- app.use()에는 functional middleware만 넣을수 있다.
+- class 미들웨어를 사용하려면 app.module.ts에서 해야한다.
+- 무언가를 inject하고 싶다면 꼭 @Injectable()을 사용해야한다.
