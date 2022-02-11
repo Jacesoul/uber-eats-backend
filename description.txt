@@ -103,3 +103,9 @@
             useClass: JwtService,
           },
         ],
+
+- middleware는 client가 request를 보내면 미들웨어가 처리하고 다음 handler로 넘긴다.
+- implements는 extends와 다르다. 
+- implements는 class가 interface처럼 행동해야한다는 것이다.
+- NestModule에서 configure의 consumer는 사용자가 정의한 미들웨어를 routes에 적용하는 방법을 정의해주는 interface이다. 
+- 미들웨어를 정확히 어떤 routes에 적용하고 싶은지 지정하려면 forRoutes를 적용하면 된다. 제외하고 싶은 routes가 있다면 exclude메소드를 사용하면 된다.
