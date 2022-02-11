@@ -125,3 +125,5 @@
 - 여기서 context는 HTTP이기 때문에 graphql로 바꿔야한다.(graphql의 context는 http와 다르기때문)
 - authentication은 누가 자원을 요청하는지 확인하는 과정이다.(token으로 identity를 확인)
 - authorization은 user가 어떤일을 하기전에 permission을 가지고 있는지 확인하는 과정이다.
+- 데코레이터를 만들기위한 createParamDecorator에는 factory function이 필요하다. 
+- factory function에는 항상 unknown value인 data와 context가 있다.
