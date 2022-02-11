@@ -119,3 +119,9 @@
 - apollo server에는 context라는 property가 존재하는데 context는 각 request에서 사용이 가능하다.
 - context는 함수로 정의되고 request마다 매번 호출되며 req property를 가진 object를 받는다.
 - context에 property를 넣으면 graphql resolver에서 사용할수있다.
+- guard는 함수인데 request를 다음 단계로 진행할지 말지를 결정한다.
+- CanActivate 또한 함수인데 true를 return하면 request를 진행시키고 false면 request를 멈추게한다.
+- CanActivate는 execution context라는 것을 사용하는데 이것이 request의 context에 접근할수 있게 해준다.(graphql의 context가 아닌 현재 pipeline의 context이다)
+- 여기서 context는 HTTP이기 때문에 graphql로 바꿔야한다.(graphql의 context는 http와 다르기때문)
+- authentication은 누가 자원을 요청하는지 확인하는 과정이다.(token으로 identity를 확인)
+- authorization은 user가 어떤일을 하기전에 permission을 가지고 있는지 확인하는 과정이다.
