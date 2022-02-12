@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { LoginInput } from './dtos/login.dto';
 import { JwtService } from 'src/jwt/jwt.service';
+import { EditProfileInput } from './dtos/edit-profile.dto';
 
 @Injectable()
 export class UserService {
@@ -66,5 +67,9 @@ export class UserService {
 
   async findById(id: number): Promise<User> {
     return this.userRepository.findOne({ id });
+  }
+
+  async editProfile(userId: number, { email, password }: EditProfileInput) {
+    return this.userRepository.update(userId, { email, password });
   }
 }
