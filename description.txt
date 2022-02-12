@@ -127,3 +127,8 @@
 - authorization은 user가 어떤일을 하기전에 permission을 가지고 있는지 확인하는 과정이다.
 - 데코레이터를 만들기위한 createParamDecorator에는 factory function이 필요하다. 
 - factory function에는 항상 unknown value인 data와 context가 있다.
+
+- Send JWT Token on Header 
+=> JwtMiddleware(decrypt, verify Token) 
+=> GraphQl context => AuthGuard(return true / false) 
+=> Auth-user Decorator(return User)
