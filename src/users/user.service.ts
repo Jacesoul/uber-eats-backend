@@ -1,3 +1,4 @@
+import { Verification } from './entities/verification.entity';
 import { CreateAccountInput } from './dtos/create-account.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,6 +13,8 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(Verification)
+    private readonly verificationRepository: Repository<Verification>,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -25,8 +28,11 @@ export class UserService {
       if (exists) {
         return { ok: false, error: 'There is a user with that em ail already' };
       }
-      await this.userRepository.save(
+      const user = await this.userRepository.save(
         this.userRepository.create({ email, password, role }),
+      );
+      await this.verificationRepository.save(
+        this.verificationRepository.create({ user }),
       );
       return { ok: true };
     } catch (e) {
@@ -73,6 +79,10 @@ export class UserService {
     const user = await this.userRepository.findOne(userId);
     if (email) {
       user.email = email;
+      user.verified = false;
+      await this.verificationRepository.save(
+        this.verificationRepository.create({ user }),
+      );
     }
     if (password) {
       user.password = password;

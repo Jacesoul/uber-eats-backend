@@ -140,5 +140,5 @@
 ### EMAIL VERIFICATION
 
 - 만약 User로부터 Veirification에 접근하고 싶다면 JoinColumn이 User쪽에 있어야한다.
-
+- npm i uuid
 
