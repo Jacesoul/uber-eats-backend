@@ -89,4 +89,17 @@ export class UserService {
     }
     return this.userRepository.save(user);
   }
+
+  async verifyEmail(code: string): Promise<boolean> {
+    const verification = await this.verificationRepository.findOne(
+      { code },
+      { relations: ['user'] },
+      // { loadRelationIds: true },
+    );
+    if (verification) {
+      verification.user.verified = true;
+      this.userRepository.save(verification.user);
+    }
+    return false;
+  }
 }
