@@ -26,7 +26,7 @@ export class UserService {
     try {
       const exists = await this.userRepository.findOne({ email });
       if (exists) {
-        return { ok: false, error: 'There is a user with that em ail already' };
+        return { ok: false, error: 'There is a user with that email already' };
       }
       const user = await this.userRepository.save(
         this.userRepository.create({ email, password, role }),
@@ -47,7 +47,10 @@ export class UserService {
     // check if the password is correct
     // make a JWT and give it to the user
     try {
-      const user = await this.userRepository.findOne({ email });
+      const user = await this.userRepository.findOne(
+        { email },
+        { select: ['id', 'password'] },
+      );
       if (!user) {
         return {
           ok: false,
@@ -91,15 +94,22 @@ export class UserService {
   }
 
   async verifyEmail(code: string): Promise<boolean> {
-    const verification = await this.verificationRepository.findOne(
-      { code },
-      { relations: ['user'] },
-      // { loadRelationIds: true },
-    );
-    if (verification) {
-      verification.user.verified = true;
-      this.userRepository.save(verification.user);
+    try {
+      const verification = await this.verificationRepository.findOne(
+        { code },
+        { relations: ['user'] },
+        // { loadRelationIds: true },
+      );
+      if (verification) {
+        console.log(verification.user);
+        verification.user.verified = true;
+        this.userRepository.save(verification.user);
+        return true;
+      }
+      throw new Error();
+    } catch (e) {
+      console.log(e);
+      return false;
     }
-    return false;
   }
 }

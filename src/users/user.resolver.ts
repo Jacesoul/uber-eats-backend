@@ -91,7 +91,19 @@ export class UserResolver {
   }
 
   @Mutation((returns) => VerifyEmailOutput)
-  verifyEmail(@Args('input') { code }: VerifyEmailInput) {
-    this.userService.verifyEmail(code);
+  async verifyEmail(
+    @Args('input') { code }: VerifyEmailInput,
+  ): Promise<VerifyEmailOutput> {
+    try {
+      this.userService.verifyEmail(code);
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
   }
 }

@@ -141,4 +141,4 @@
 
 - 만약 User로부터 Veirification에 접근하고 싶다면 JoinColumn이 User쪽에 있어야한다.
 - npm i uuid
-
+- onDelete: 'CASCADE'의 의미는 만약 user를 삭제하면 user와 붙어있는 verification도 같이 삭제한다는 의미이다.
