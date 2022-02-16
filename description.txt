@@ -143,3 +143,6 @@
 - npm i uuid
 - onDelete: 'CASCADE'의 의미는 만약 user를 삭제하면 user와 붙어있는 verification도 같이 삭제한다는 의미이다.
 - resolver는 문자기 같은 역할이다. input들을 받아서 올바른 service로 전달해주는 일을 한다.
+- Maingun은 이메일을 보내는 최고의 서비스이다.
+- Maingun 계정을 만들고 카드를 등록하지 않으면 5명의 등록된 이메일로만 보낼수 있다.
+- 샌드박스 도메인은 이 도메인으로부터 이메일을 보낸다는 것을 의미한다.

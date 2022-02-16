@@ -115,12 +115,12 @@ export class UserService {
       const verification = await this.verificationRepository.findOne(
         { code },
         { relations: ['user'] },
-        // { loadRelationIds: true },
       );
       if (verification) {
         console.log(verification.user);
         verification.user.verified = true;
-        this.userRepository.save(verification.user);
+        await this.userRepository.save(verification.user);
+        await this.verificationRepository.delete(verification.id);
         return { ok: true };
       }
       return { ok: false, error: 'Verification not found' };
