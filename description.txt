@@ -146,3 +146,7 @@
 - Maingun은 이메일을 보내는 최고의 서비스이다.
 - Maingun 계정을 만들고 카드를 등록하지 않으면 5명의 등록된 이메일로만 보낼수 있다.
 - 샌드박스 도메인은 이 도메인으로부터 이메일을 보낸다는 것을 의미한다.
+- node.js에는 프런트엔드처럼 fetch가 없다.
+- npm install got
+- npm i form-data
+- form-data는 node.jsdptj 스트림을 만드는 라이브러리이다. 
