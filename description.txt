@@ -159,3 +159,5 @@
 - NestJS가 테스트 패키지를 가지고 있는 덕분에 유저 서비스만을 위한 독립된 모듈을 제공해주었다.   
 - 유닛테스트의 포인트는 가능한 한 테스트들을 독립시키는것이다.
 - Mock는 가짜 함수이다. Mock을 사용하는 이유는 유저 서비스를 단독으로 테스트하고 싶기 때문이다. 
+- TypeScript의 Partial은 모든 요소를 optional로 만들어준다.
+- TypeScript의 Record는 타입 T의 요소 K의 집합이다. 요소의 집합이란건 User Repository의 모든 요소들을 말한다.(findOne, save, create, update 등등) 타입은 그냥 jest.Mock이다.
