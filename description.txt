@@ -150,3 +150,6 @@
 - npm install got
 - npm i form-data
 - form-data는 node.jsdptj 스트림을 만드는 라이브러리이다. 
+- 이메일을 좀더 이쁘게 만들기 위해 템플릿을 사용하는것이 좋다.
+- [Mailgun]-[Sending]-[Templates]
+- 이메일은 모두 테이블로 이루어져있기때문에 이메일 템플릿 작업을 하는것은 악몽이다.
