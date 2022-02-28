@@ -161,5 +161,6 @@
 - Mock는 가짜 함수이다. Mock을 사용하는 이유는 유저 서비스를 단독으로 테스트하고 싶기 때문이다. 
 - TypeScript의 Partial은 모든 요소를 optional로 만들어준다.
 - TypeScript의 Record는 타입 T의 요소 K의 집합이다. 요소의 집합이란건 User Repository의 모든 요소들을 말한다.(findOne, save, create, update 등등) 타입은 그냥 jest.Mock이다.
-- jest와 mock을 사용해서 dependency에 있는 함수의 반환값을 속일수 있다.
+- jest와 mock을 사용해서 코드에서 특정부분의 리턴값을 속일수있다.
 - mockResolvedValue를 통해 데이터베이스에 유저가 있다고 속일수 있게 해준다.
+- toHaveBeenCalledTimes는 해당 함수가 단 한번 불릴거라고 기대하는것이다.
