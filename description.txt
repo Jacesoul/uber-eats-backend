@@ -164,3 +164,4 @@
 - jest와 mock을 사용해서 코드에서 특정부분의 리턴값을 속일수있다.
 - mockResolvedValue를 통해 데이터베이스에 유저가 있다고 속일수 있게 해준다.
 - toHaveBeenCalledTimes는 해당 함수가 단 한번 불릴거라고 기대하는것이다.
+- unit testing 할때는 beforeEach를 사용하고 end-to-end testing할때는 beforeAll을 사용한다. 
