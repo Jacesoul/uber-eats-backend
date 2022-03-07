@@ -167,3 +167,4 @@
 - unit testing 할때는 beforeEach를 사용하고 end-to-end testing할때는 beforeAll을 사용한다. 
 - mockRejectedValue와 jest.fn(() => Promise.resolve())는 똑같은 작업을 한다. 
 - mockReturnValue와 mockResolvedValue의 차이는 create가 promise를 return하지 않는다는 것이다. 그러나 save는 promise를 return 한다. 
+- mocking을 쓰는 이유는 코드의 return value에 영향을 주고 싶어서 라는것을 기억해야한다.
