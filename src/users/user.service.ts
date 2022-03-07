@@ -29,7 +29,6 @@ export class UserService {
   }: CreateAccountInput): Promise<{ ok: boolean; error?: string }> {
     try {
       const exists = await this.userRepository.findOne({ email });
-      console.log(exists);
       if (exists) {
         return { ok: false, error: 'There is a user with that email already' };
       }
@@ -120,7 +119,6 @@ export class UserService {
         { relations: ['user'] },
       );
       if (verification) {
-        console.log(verification.user);
         verification.user.verified = true;
         await this.userRepository.save(verification.user);
         await this.verificationRepository.delete(verification.id);
@@ -128,7 +126,7 @@ export class UserService {
       }
       return { ok: false, error: 'Verification not found' };
     } catch (error) {
-      return { ok: false, error };
+      return { ok: false, error: 'Could not verify email' };
     }
   }
 }
