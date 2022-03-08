@@ -175,3 +175,6 @@
 - jwt를 실제 JWT package로부터 사용하지 않으려고 이런 작업을 해주는것이다. 
 - dependency를 import 했지만 dependency를 mocking하고 있기 때문에 mocking한 곳으로 접근할수가 있다.
 - BeforeEach, describe등은 jest를 통해 받았기 때문에 import 할 필요가 없다.
+- jest는 함수를 mock function으로 만들지 않으면 그 함수를 spying할수 없다.
+- 함수를 mock할수 없을때 spy를 사용한다.
+- mockImplementation은 sendEmail이 호출되었을때, 그 콜을 가로채서(intercept) 나만의 구현(implementation)을 추가할수 있는 것이다.
