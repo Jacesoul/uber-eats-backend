@@ -183,3 +183,5 @@
 - .env.test 파일에 데이터베이스 이름만 test로 바꿔서 넣어준다. (.env.dev과 동일하게)
 - beforeEach를 beforeAll로 변경하면 실제 데이터베이스가 없기 때문에 오류가 나온다. 데이터베이스에서 uber-eats-test생성하기 
 - coverage폴더의 lcov-report에서 coverage의 멋진 인터페이스를 제공해준다. 코드랑 어떤 부분이 테스트가 되지 않았는지도 볼수있다.
+-Jest did not exit one second after the test run has completed. 이 경고창의 의미는 뭔가가 종료되지 않은 상태에서 Jest가 종료되었기 때문에 뜨는 경고이다. 
+- 이럴때는 application을 종료하는 코드를 넣어줘야한다.
