@@ -186,3 +186,4 @@
 -Jest did not exit one second after the test run has completed. 이 경고창의 의미는 뭔가가 종료되지 않은 상태에서 Jest가 종료되었기 때문에 뜨는 경고이다. 
 - 이럴때는 application을 종료하는 코드를 넣어줘야한다.
 - resolver를 테스트할때에도 이메일을 보내고 싶지 않기 때문에 got를 mocking한다. 
+- supertest에서 header는 post뒤에 set으로 해야한다. 
