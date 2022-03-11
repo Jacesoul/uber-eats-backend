@@ -189,7 +189,6 @@ describe('UserModule (e2e)', () => {
               },
             },
           } = res;
-          console.log(res.body);
           expect(ok).toBe(true);
           expect(error).toBe(null);
           expect(id).toBe(userId);
@@ -221,7 +220,6 @@ describe('UserModule (e2e)', () => {
               },
             },
           } = res;
-          console.log(res.body);
           expect(ok).toBe(false);
           expect(error).toBe('User Not Found');
           expect(user).toBe(null);
@@ -229,7 +227,56 @@ describe('UserModule (e2e)', () => {
     });
   });
 
-  it.todo('me');
+  describe('me', () => {
+    it('should find my profile', () => {
+      return request(app.getHttpServer())
+        .post(GRAPHQl_ENDPOINT)
+        .set('X-JWT', jwtToken)
+        .send({
+          query: `
+          {
+            me{
+              email
+            }
+          }
+          `,
+        })
+        .expect(200)
+        .expect((res) => {
+          const {
+            body: {
+              data: {
+                me: { email },
+              },
+            },
+          } = res;
+          expect(email).toBe(testUser.email);
+        });
+    });
+
+    it('should not allow logged out user', () => {
+      return request(app.getHttpServer())
+        .post(GRAPHQl_ENDPOINT)
+        .send({
+          query: `
+          {
+            me{
+              email
+            }
+          }
+          `,
+        })
+        .expect(200)
+        .expect((res) => {
+          const {
+            body: { errors },
+          } = res;
+          const [error] = errors;
+          expect(error.message).toBe('Forbidden resource');
+        });
+    });
+  });
+
   it.todo('verifyEmail');
   it.todo('editProfile');
 });
