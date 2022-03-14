@@ -16,6 +16,6 @@ export class CoreEntity {
   createdAt: Date;
 
   @UpdateDateColumn()
-  @Field((type) => Number)
+  @Field((type) => Date)
   updatedAt: Date;
 }
