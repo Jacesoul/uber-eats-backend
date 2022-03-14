@@ -187,3 +187,7 @@
 - 이럴때는 application을 종료하는 코드를 넣어줘야한다.
 - resolver를 테스트할때에도 이메일을 보내고 싶지 않기 때문에 got를 mocking한다. 
 - supertest에서 header는 post뒤에 set으로 해야한다. 
+
+### Restaurant CRUD 
+- Error: Schema must contain uniquely named types but contains multiple types named "Category".
+- 해당 에러가 나는 이유는 ObjectType과 InputType이 같은 이름을 사용하고 있었기 때문이다. 
