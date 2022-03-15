@@ -12,32 +12,15 @@ import {
 } from './dtos/edit-restaurant.dto';
 import { Category } from './entities/category.entity';
 import { Restaurant } from './entities/restaurant.entity';
+import { CategoryRepository } from './repositories/category.repository';
 
 @Injectable()
 export class RestaurantService {
   constructor(
     @InjectRepository(Restaurant)
     private readonly restaurantRepository: Repository<Restaurant>,
-    @InjectRepository(Category)
-    private readonly categorytRepository: Repository<Category>,
+    private readonly categorytRepository: CategoryRepository,
   ) {}
-
-  async getOrCreateCategory(name: string): Promise<Category> {
-    const categoryName = name.trim().toLocaleLowerCase();
-    const categorySlug = categoryName.replace(/ /g, '-');
-    let category = await this.categorytRepository.findOne({
-      slug: categorySlug,
-    });
-    if (!category) {
-      category = await this.categorytRepository.save(
-        this.categorytRepository.create({
-          slug: categorySlug,
-          name: categoryName,
-        }),
-      );
-    }
-    return category;
-  }
 
   async createRestaurant(
     owner: User,
@@ -48,7 +31,7 @@ export class RestaurantService {
         createRestaurantInput,
       );
       newRestaurant.owner = owner;
-      const category = await this.getOrCreateCategory(
+      const category = await this.categorytRepository.getOrCreate(
         createRestaurantInput.categoryName,
       );
       newRestaurant.category = category;
@@ -85,6 +68,19 @@ export class RestaurantService {
           error: "You can't edit a restaurant that you don't own",
         };
       }
+      let category: Category = null;
+      if (editRestaurantInput.categoryName) {
+        category = await this.categorytRepository.getOrCreate(
+          editRestaurantInput.categoryName,
+        );
+      }
+      await this.restaurantRepository.save([
+        {
+          id: editRestaurantInput.restaurantId,
+          ...editRestaurantInput,
+          ...(category && { category }), // category가 존재하면 category가 category인 object를 리턴(...를 추가하면 {}가 지워진다)
+        },
+      ]);
       return { ok: true };
     } catch {
       return {
