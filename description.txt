@@ -193,3 +193,6 @@
 - 해당 에러가 나는 이유는 ObjectType과 InputType이 같은 이름을 사용하고 있었기 때문이다. 
 - authentication은 사람에게 '너 누구야?'라고 물어보는 것과 같다. 
 - authorization은 이 resource에 접근할 수 있냐고 물어보는 것과 같다. 
+- APP_GUARD는 이미 nestjs에서 제공된 constant이다. 
+- guard를 앱 모든곳에서 사용하고 싶다면 그냥 APP_GUARD를 provide하면 된다. 
+- guard는 한가지 기능밖에 없다. true 또는 false 리턴 
