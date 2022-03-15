@@ -191,3 +191,5 @@
 ### Restaurant CRUD 
 - Error: Schema must contain uniquely named types but contains multiple types named "Category".
 - 해당 에러가 나는 이유는 ObjectType과 InputType이 같은 이름을 사용하고 있었기 때문이다. 
+- authentication은 사람에게 '너 누구야?'라고 물어보는 것과 같다. 
+- authorization은 이 resource에 접근할 수 있냐고 물어보는 것과 같다. 
