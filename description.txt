@@ -203,3 +203,4 @@
 - rosolver가 metadata나 role이 없으면 그 resolver는 public이다. 
 - roles에는 client, owner, deliver, any라는 옵션이 있다.
 - any라는건 유저가 로그인되어있다면 좋다는 뜻이다.
+- partial type은 class의 모든 property를 가져와서 optional 취급한다. 
