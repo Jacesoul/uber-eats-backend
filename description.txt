@@ -195,4 +195,11 @@
 - authorization은 이 resource에 접근할 수 있냐고 물어보는 것과 같다. 
 - APP_GUARD는 이미 nestjs에서 제공된 constant이다. 
 - guard를 앱 모든곳에서 사용하고 싶다면 그냥 APP_GUARD를 provide하면 된다. 
-- guard는 한가지 기능밖에 없다. true 또는 false 리턴 
+- guard는 한가지 기능밖에 없다. true 또는 false 리턴한다. 
+- guard의 canActivate는 함수인데 boolean값을 리턴해야한다.
+- reflector는 metadata를 get한다.
+- metadata는 resolver의 extra data이다. 
+- role.decorator.ts는 decorator를 리턴하는 decorator이다.
+- rosolver가 metadata나 role이 없으면 그 resolver는 public이다. 
+- roles에는 client, owner, deliver, any라는 옵션이 있다.
+- any라는건 유저가 로그인되어있다면 좋다는 뜻이다.
