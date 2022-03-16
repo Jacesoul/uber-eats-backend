@@ -204,3 +204,4 @@
 - roles에는 client, owner, deliver, any라는 옵션이 있다.
 - any라는건 유저가 로그인되어있다면 좋다는 뜻이다.
 - partial type은 class의 모든 property를 가져와서 optional 취급한다. 
+- typeORM에서 save할때 id를 보내지 않는 경우 새로운 entity를 생성하는 작업을 한다. id를 보내주게 되면 typeorm이 해당 entity를 찾아 update를 해준다.
