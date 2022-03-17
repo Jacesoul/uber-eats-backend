@@ -141,4 +141,8 @@ export class RestaurantService {
       };
     }
   }
+
+  countRestaurant(category: Category) {
+    return this.restaurantRepository.count({ category });
+  }
 }

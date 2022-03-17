@@ -208,3 +208,4 @@
 - dynamic field는 db에 실제로 저장되지 않는 field이다. request가 있을때마다 계산해서(computed) 보여주는 field이다. 
 - 보통 computed field, dynamic field는 로그인된 사용자의 상태에 따라 계산되는 field이다. 
 - ResolveField는 매 request마다 계산된 field를 만들어준다. 
+- restaurantCount에서 await을 쓰지 않아도 괜찮은 이유는 promise를 return하면 브라우저가 알아서 결과가 나올때까지 기다린다.
