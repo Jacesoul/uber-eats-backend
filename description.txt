@@ -205,3 +205,6 @@
 - any라는건 유저가 로그인되어있다면 좋다는 뜻이다.
 - partial type은 class의 모든 property를 가져와서 optional 취급한다. 
 - typeORM에서 save할때 id를 보내지 않는 경우 새로운 entity를 생성하는 작업을 한다. id를 보내주게 되면 typeorm이 해당 entity를 찾아 update를 해준다.
+- dynamic field는 db에 실제로 저장되지 않는 field이다. request가 있을때마다 계산해서(computed) 보여주는 field이다. 
+- 보통 computed field, dynamic field는 로그인된 사용자의 상태에 따라 계산되는 field이다. 
+- ResolveField는 매 request마다 계산된 field를 만들어준다. 
