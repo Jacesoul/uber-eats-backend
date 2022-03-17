@@ -35,6 +35,7 @@ The Backend of Uber Eats Clone
 - See Categories
 - See Restaurants by Category (pagination)
 - See Restaurants (pagination)
+- Search Restaurant
 - See Restaurant
 
 - Create Dish
