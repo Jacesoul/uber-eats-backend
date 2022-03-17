@@ -25,6 +25,7 @@ import {
   DeleteRestaurantInput,
   DeleteRestaurantOutput,
 } from './dtos/delete-restaurant.dto';
+import { CategoryInput, CategoryOutput } from './dtos/category.dto';
 
 @Resolver((of) => Restaurant)
 export class RestaurantResolver {
@@ -68,7 +69,7 @@ export class RestaurantResolver {
 export class CategoryResolver {
   constructor(private readonly restaurantService: RestaurantService) {}
 
-  @ResolveField((type) => Number)
+  @ResolveField((returns) => Number)
   restaurantCount(@Parent() category: Category): Promise<number> {
     return this.restaurantService.countRestaurant(category);
   }
@@ -76,5 +77,10 @@ export class CategoryResolver {
   @Query((returns) => AllCategoriesOutput)
   allCategories(): Promise<AllCategoriesOutput> {
     return this.restaurantService.allCategories();
+  }
+
+  @Query((returns) => CategoryOutput)
+  category(@Args() categoryInput: CategoryInput): Promise<CategoryOutput> {
+    return this.restaurantService.findCategoryBySlug(categoryInput);
   }
 }
