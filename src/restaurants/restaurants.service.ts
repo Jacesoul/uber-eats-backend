@@ -7,7 +7,7 @@ import { AllCategoriesOutput } from './dtos/all-categories.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
-import { Like, Repository } from 'typeorm';
+import { Raw, Repository } from 'typeorm';
 import {
   CreateRestaurantInput,
   CreateRestaurantOutput,
@@ -240,9 +240,17 @@ export class RestaurantService {
       const [restaurants, totalResults] =
         await this.restaurantRepository.findAndCount({
           where: {
-            name: Like(`%${query}%`),
+            name: Raw((name) => `${name} ILIKE '%${query}%'`),
           },
+          skip: (page - 1) * 25,
+          take: 25,
         });
+      return {
+        ok: true,
+        restaurants,
+        totalResults,
+        totalPages: Math.ceil(totalResults / 25),
+      };
     } catch {
       return { ok: false, error: 'Could not search for restaurants' };
     }
