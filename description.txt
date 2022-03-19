@@ -221,3 +221,4 @@
 - type : json은 기본적으로 json data를 저장한다. 
 - json은 MySQL, PostgreSQL에서 지원하는 data type이다. 
 - try/catch에서 catch는 발견하는 모든 error을 잡아준다.  
+- order와 dish의 manyTomany관계에서 joinTable을 Order쪽에 넣는 이유는 dish가 얼마나 많은 order를 받았는지 알 필요가 없다. 하지만 order로부터 몇개의 dish를 주문했는지는 알아야한다.
