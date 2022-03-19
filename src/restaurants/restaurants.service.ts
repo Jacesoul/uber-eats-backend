@@ -1,8 +1,13 @@
+import {
+  SearchRestaurantOutput,
+  SerachRestaurantInput,
+} from './dtos/search-restaurant.dto';
+import { RestaurantInput, RestaurantOutput } from './dtos/restaurant.dto';
 import { AllCategoriesOutput } from './dtos/all-categories.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import {
   CreateRestaurantInput,
   CreateRestaurantOutput,
@@ -19,7 +24,7 @@ import { Category } from './entities/category.entity';
 import { Restaurant } from './entities/restaurant.entity';
 import { CategoryRepository } from './repositories/category.repository';
 import { CategoryInput, CategoryOutput } from './dtos/category.dto';
-import { RestaurantOutput, RestaurantsInput } from './dtos/restaurant.dto';
+import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -183,7 +188,7 @@ export class RestaurantService {
     }
   }
 
-  async allRestaurants({ page }: RestaurantsInput): Promise<RestaurantOutput> {
+  async allRestaurants({ page }: RestaurantsInput): Promise<RestaurantsOutput> {
     try {
       const [results, totalResults] =
         await this.restaurantRepository.findAndCount({
@@ -201,6 +206,45 @@ export class RestaurantService {
         ok: false,
         error: 'Could not load restaurants',
       };
+    }
+  }
+
+  async findRestaurantById({
+    restaurantId,
+  }: RestaurantInput): Promise<RestaurantOutput> {
+    try {
+      const restaurant = await this.restaurantRepository.findOne(restaurantId);
+      if (!restaurant) {
+        return {
+          ok: false,
+          error: 'Restaurant not found',
+        };
+      }
+      return {
+        ok: true,
+        restaurant,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not find restaurant',
+      };
+    }
+  }
+
+  async searchRestaurantByName({
+    query,
+    page,
+  }: SerachRestaurantInput): Promise<SearchRestaurantOutput> {
+    try {
+      const [restaurants, totalResults] =
+        await this.restaurantRepository.findAndCount({
+          where: {
+            name: Like(`%${query}%`),
+          },
+        });
+    } catch {
+      return { ok: false, error: 'Could not search for restaurants' };
     }
   }
 }
