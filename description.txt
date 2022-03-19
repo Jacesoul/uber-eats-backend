@@ -220,3 +220,4 @@
 ### DISH and ORDER CRUD 
 - type : json은 기본적으로 json data를 저장한다. 
 - json은 MySQL, PostgreSQL에서 지원하는 data type이다. 
+- try/catch에서 catch는 발견하는 모든 error을 잡아준다.  
