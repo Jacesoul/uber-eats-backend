@@ -218,3 +218,5 @@
 - CRON은 원하는 때마다 규칙적으로 수행되는 작업을 의미한다. 
 
 ### DISH and ORDER CRUD 
+- type : json은 기본적으로 json data를 저장한다. 
+- json은 MySQL, PostgreSQL에서 지원하는 data type이다. 

@@ -1,3 +1,4 @@
+import { CreateDishInput, CreateDishOutput } from './dtos/create-dish.dto';
 import {
   SearchRestaurantOutput,
   SerachRestaurantInput,
@@ -213,7 +214,9 @@ export class RestaurantService {
     restaurantId,
   }: RestaurantInput): Promise<RestaurantOutput> {
     try {
-      const restaurant = await this.restaurantRepository.findOne(restaurantId);
+      const restaurant = await this.restaurantRepository.findOne(restaurantId, {
+        relations: ['menu'],
+      });
       if (!restaurant) {
         return {
           ok: false,
@@ -254,5 +257,14 @@ export class RestaurantService {
     } catch {
       return { ok: false, error: 'Could not search for restaurants' };
     }
+  }
+
+  async createDish(
+    owner: User,
+    createDishInput: CreateDishInput,
+  ): Promise<CreateDishOutput> {
+    return {
+      ok: false,
+    };
   }
 }
