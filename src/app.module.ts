@@ -1,3 +1,4 @@
+import { OrderItem } from './orders/entities/order-item.entity';
 import {
   MiddlewareConsumer,
   Module,
@@ -56,7 +57,15 @@ import { Order } from './orders/entities/order.entity';
       synchronize: process.env.NODE_ENV !== 'prod',
       logging:
         process.env.NODE_ENV !== 'prod' && process.env.NODE_ENV !== 'test',
-      entities: [Restaurant, User, Verification, Category, Dish, Order],
+      entities: [
+        Restaurant,
+        User,
+        Verification,
+        Category,
+        Dish,
+        Order,
+        OrderItem,
+      ],
     }),
     UsersModule,
     AuthModule,

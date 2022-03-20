@@ -222,3 +222,7 @@
 - json은 MySQL, PostgreSQL에서 지원하는 data type이다. 
 - try/catch에서 catch는 발견하는 모든 error을 잡아준다.  
 - order와 dish의 manyTomany관계에서 joinTable을 Order쪽에 넣는 이유는 dish가 얼마나 많은 order를 받았는지 알 필요가 없다. 하지만 order로부터 몇개의 dish를 주문했는지는 알아야한다.
+- dish의 options는 order가 생성되고 완료될때 한번 저장이된다. 나중에 주인이 음식의 옵션을 수정해도 문제가 없어진다. 이런이유로 options을 관계짓지않고 json으로 타입을 만든다.
+- order-item entity의 dish ManyToOne에서는 Dish에서 어떻게 OrderItem을 가져올지 신경쓰지 않아도 된다.
+- manyToOne 이나 oneToMany에서 항상 반대의 관게가 어떻게 되는지 명시해줄 필요가 없다. 
+- 반대쪽 관계에서 접근을 하고 싶을때만 해주면 된다.(단지 OrderItem에서 Dish로 접근하기만 원하기 때문이다 )
