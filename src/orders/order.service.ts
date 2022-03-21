@@ -1,3 +1,5 @@
+import { Dish } from 'src/restaurants/entities/dish.entity';
+import { OrderItem } from './entities/order-item.entity';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { CreateOrderInput, CreateOrderOutput } from './dtos/create-order.dto';
 import { Injectable } from '@nestjs/common';
@@ -11,6 +13,10 @@ export class OrderService {
   constructor(
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
+    @InjectRepository(Dish)
+    private readonly dishRepository: Repository<Dish>,
+    @InjectRepository(OrderItem)
+    private readonly orderItemRepository: Repository<OrderItem>,
     @InjectRepository(Restaurant)
     private readonly restaurantRepository: Repository<Restaurant>,
   ) {}
@@ -26,9 +32,20 @@ export class OrderService {
         error: 'Restaurant not found',
       };
     }
-
-    const order = await this.orderRepository.save(
-      this.orderRepository.create({ customer, restaurant }),
-    );
+    items.forEach(async (item) => {
+      const dish = await this.dishRepository.findOne(item.dishId);
+      if (!dish) {
+        // abort this whole thing
+      }
+      await this.orderItemRepository.save(
+        this.orderItemRepository.create({
+          dish,
+          options: item.options,
+        }),
+      );
+    });
+    // const order = await this.orderRepository.save(
+    //   this.orderRepository.create({ customer, restaurant }),
+    // );
   }
 }
