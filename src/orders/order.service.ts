@@ -26,5 +26,9 @@ export class OrderService {
         error: 'Restaurant not found',
       };
     }
+
+    const order = await this.orderRepository.save(
+      this.orderRepository.create({ customer, restaurant }),
+    );
   }
 }
