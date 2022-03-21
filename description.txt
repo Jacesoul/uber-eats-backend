@@ -227,3 +227,4 @@
 - manyToOne 이나 oneToMany에서 항상 반대의 관게가 어떻게 되는지 명시해줄 필요가 없다. 
 - 반대쪽 관계에서 접근을 하고 싶을때만 해주면 된다.(단지 OrderItem에서 Dish로 접근하기만 원하기 때문이다 )
 - OrderItem 전체를 input으로 하고 싶지 않기에 CreateDishInput에서 picktype을 사용하지 않았다. 
+- forEach에서는 return할수 없다. for of loop을 사용하면 return이 가능하다.
