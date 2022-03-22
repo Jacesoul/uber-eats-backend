@@ -45,9 +45,9 @@ The Backend of Uber Eats Clone
 - Orders CRUD
 - Orders Subscription :
 
-  - s : subscribe | t : trigger
   - Pending Orders(Owner) (s: newOrder) (t: createOrder(newOrder))
   - Order Status(Client, Delivery, Owner) (s: orderUpdate) (t: editOrder(orderUpdate))
   - Pending Pickup Order(Delivery) (s: orderUpdate) (t: editOrder(orderUpdate))
+  - s : subscribe | t : trigger
 
 - Payments(CRON)
