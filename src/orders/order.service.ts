@@ -1,3 +1,4 @@
+import { EditOrderInput, EditOrderOutput } from './dtos/edit-order.dto';
 import { GetOrderInput, GetOrderOutput } from './dtos/get-order.dto';
 import { GetOrdersInput, GetOrdersOutput } from './dtos/get-orders.dto';
 import { Dish } from 'src/restaurants/entities/dish.entity';
@@ -7,7 +8,7 @@ import { CreateOrderInput, CreateOrderOutput } from './dtos/create-order.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Order } from './entities/order.entity';
+import { Order, OrderStatus } from './entities/order.entity';
 import { User, UserRole } from 'src/users/entities/user.entity';
 
 @Injectable()
@@ -137,6 +138,20 @@ export class OrderService {
     }
   }
 
+  canSeeOrder(user: User, order: Order): boolean {
+    let canSee = true;
+    if (user.role === UserRole.Client && order.customerId !== user.id) {
+      canSee = false;
+    }
+    if (user.role === UserRole.Delivery && order.driverId !== user.id) {
+      canSee = false;
+    }
+    if (user.role === UserRole.Owner && order.restaurant.ownerId !== user.id) {
+      canSee = false;
+    }
+    return canSee;
+  }
+
   async getOrder(
     user: User,
     { id: orderId }: GetOrderInput, // 이렇게 하면 이름을 재명시 해줄수 있다.
@@ -151,20 +166,8 @@ export class OrderService {
           error: 'Order not found',
         };
       }
-      let canSee = true;
-      if (user.role === UserRole.Client && order.customerId !== user.id) {
-        canSee = false;
-      }
-      if (user.role === UserRole.Delivery && order.driverId !== user.id) {
-        canSee = false;
-      }
-      if (
-        user.role === UserRole.Owner &&
-        order.restaurant.ownerId !== user.id
-      ) {
-        canSee = false;
-      }
-      if (!canSee) {
+
+      if (!this.canSeeOrder(user, order)) {
         return {
           ok: false,
           error: "You can't see that",
@@ -178,6 +181,64 @@ export class OrderService {
       return {
         ok: false,
         error: 'Could not load orders',
+      };
+    }
+  }
+
+  async editOrder(
+    user: User,
+    { id: orderId, status }: EditOrderInput,
+  ): Promise<EditOrderOutput> {
+    try {
+      const order = await this.orderRepository.findOne(orderId, {
+        relations: ['restaurant'],
+      });
+      if (!order) {
+        return {
+          ok: false,
+          error: 'Order not found',
+        };
+      }
+      if (!this.canSeeOrder(user, order)) {
+        return {
+          ok: false,
+          error: "You can't see that",
+        };
+      }
+      let canEdit = true;
+      if (user.role === UserRole.Client) {
+        canEdit = false;
+      }
+      if (user.role === UserRole.Owner) {
+        if (status !== OrderStatus.Cooking && status !== OrderStatus.Cooked) {
+          canEdit = false;
+        }
+      }
+      if (user.role === UserRole.Delivery) {
+        if (
+          status !== OrderStatus.PickedUp &&
+          status !== OrderStatus.Deliverd
+        ) {
+          canEdit = false;
+        }
+      }
+      if (!canEdit) {
+        return {
+          ok: false,
+          error: "You can't do that",
+        };
+      }
+      await this.orderRepository.save({
+        id: orderId,
+        status,
+      });
+      return {
+        ok: true,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not edit order',
       };
     }
   }
