@@ -245,3 +245,7 @@
 - 동시에 많은 서버를 가지고 있는경우에는 이 PubSub으로 구현하면 안된다.
 - 동시에 많은 서버를 가지고 있는 경우에는 여기 서버가 아닌 다른 분리되 서버에 저장하라는 뜻이다.
 - graphql-redis-subscriptions을 사용하면 가능하다. 기존의 new PubSub()을 RedisPubSub으로만 바꿔주면 된다.
+- filter function은 현재 listening하는 사용자가 update 알림을 받아야하는지 말아야하는지 결정한다.
+- 첫번째 argument는 payload이고 두번째 argument는 해당 resolver의 variables이고 세번째 argument는 context이다. 
+- resolve는 사용자가 받는 update 알림의 형태를 바꿔주는일을 한다.
+- filter는 boolean값을 리턴해야하고 resolve는 subscription이 알려야하는걸 return하면 된다.

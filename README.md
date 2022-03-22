@@ -43,6 +43,11 @@ The Backend of Uber Eats Clone
 - Delete Dish
 
 - Orders CRUD
-- Orders Subscription(Owner, Customer, Delivery)
+- Orders Subscription :
+
+  - s : subscribe | t : trigger
+  - Pending Orders(Owner) (s: newOrder) (t: createOrder(newOrder))
+  - Order Status(Client, Delivery, Owner) (s: orderUpdate) (t: editOrder(orderUpdate))
+  - Pending Pickup Order(Delivery) (s: orderUpdate) (t: editOrder(orderUpdate))
 
 - Payments(CRON)
