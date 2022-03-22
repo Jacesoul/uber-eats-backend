@@ -56,10 +56,11 @@ export class OrderResolver {
   }
 
   @Subscription((returns) => Order, {
-    filter: (payload, _, context) => {
-      console.log(payload, context);
-      return true;
+    filter: ({ pendingOrders: { ownerId } }, _, { user }) => {
+      // _의 의미는 args를 쓰는대신 _를 써서 variables를 신경쓰지 않는다는걸 나타낸다.
+      return ownerId === user.id;
     },
+    resolve: ({ pendingOrders: { order } }) => order,
   })
   @Role(['Owner'])
   pendingOrders() {
