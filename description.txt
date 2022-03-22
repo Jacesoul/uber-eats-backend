@@ -229,3 +229,11 @@
 - OrderItem 전체를 input으로 하고 싶지 않기에 CreateDishInput에서 picktype을 사용하지 않았다. 
 - forEach에서는 return할수 없다. for of loop을 사용하면 return이 가능하다.
 - flat은 만약 내부에 많은 array를 가진 array가 있다면 flat이 그것들을 없애준다.
+
+### ORDER SUBSCRIPTIONS 
+- graphql subscription을 위해 사용할 패키지의 이름은 graphql-subscriptions이다.
+- PubSub은 publish와 subscribe를 말한다. 이걸로 app 내부에서 메세지를 교환할수 있다.
+- pubsub.asyncIterator()에는 triggers라는게 있는데 triggers는 우리가 기다리는 이벤트를 말한다.
+- Mutation과 Query는 HTTP가 필요하고 Subscription은 Web Socket이 필요하다.
+- app모듈에 installSubscriptionHandlers: true를 설정하게 되면 서버가 웹소켓 기능을 가지게 된다.
+- 웹소켓에서는 request가 없기 때문에 req을 읽을수 없다.

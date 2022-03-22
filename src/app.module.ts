@@ -43,8 +43,12 @@ import { Order } from './orders/entities/order.entity';
       }),
     }),
     GraphQLModule.forRoot({
+      installSubscriptionHandlers: true,
       autoSchemaFile: true,
-      context: ({ req }) => ({ user: req['user'] }),
+      context: ({ req }) => {
+        console.log(req);
+        return { user: req['user'] };
+      },
     }),
     RestaurantsModule,
     TypeOrmModule.forRoot({
