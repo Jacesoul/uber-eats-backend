@@ -43,15 +43,14 @@ import { Order } from './orders/entities/order.entity';
       }),
     }),
     GraphQLModule.forRoot({
-      installSubscriptionHandlers: true,
-      autoSchemaFile: true,
-      context: ({ req, connection }) => {
-        if (req) {
-          return { user: req['user'] };
-        } else {
-          console.log(connection);
-        }
+      subscriptions: {
+        'subscriptions-transport-ws': {
+          onConnect: (connectionParams: any) => {
+            return connectionParams;
+          },
+        },
       },
+      autoSchemaFile: true,
     }),
     RestaurantsModule,
     TypeOrmModule.forRoot({
@@ -89,11 +88,4 @@ import { Order } from './orders/entities/order.entity';
   controllers: [],
   providers: [],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(JwtMiddleware).forRoutes({
-      path: '/graphql',
-      method: RequestMethod.POST,
-    });
-  }
-}
+export class AppModule {}
