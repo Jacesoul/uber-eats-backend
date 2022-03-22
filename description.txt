@@ -237,3 +237,4 @@
 - Mutation과 Query는 HTTP가 필요하고 Subscription은 Web Socket이 필요하다.
 - app모듈에 installSubscriptionHandlers: true를 설정하게 되면 서버가 웹소켓 기능을 가지게 된다.
 - 웹소켓에서는 request가 없기 때문에 req을 읽을수 없다.
+- HTTP에서는 매번 request 할때마다 토큰을 보낸다. 웹소켓은 딱 한번만 토큰을 보낸다. 연결을 시작할때 토큰을 보내는데 연결이 끝나지 않는다.
