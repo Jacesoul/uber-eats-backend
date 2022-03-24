@@ -1,5 +1,9 @@
 import { PubSub } from 'graphql-subscriptions';
-import { NEW_PEDING_ORDER, PUB_SUB } from './../common/common.constants';
+import {
+  NEW_PEDING_ORDER,
+  PUB_SUB,
+  NEW_COOKED_ORDER,
+} from './../common/common.constants';
 import { EditOrderOutput, EditOrderInput } from './dtos/edit-order.dto';
 import { GetOrderOutput, GetOrderInput } from './dtos/get-order.dto';
 import { GetOrdersOutput, GetOrdersInput } from './dtos/get-orders.dto';
@@ -65,5 +69,11 @@ export class OrderResolver {
   @Role(['Owner'])
   pendingOrders() {
     return this.pubSub.asyncIterator(NEW_PEDING_ORDER);
+  }
+
+  @Subscription((returns) => Order)
+  @Role(['Delivery'])
+  cookedOrders() {
+    return this.pubSub.asyncIterator(NEW_COOKED_ORDER);
   }
 }

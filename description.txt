@@ -249,3 +249,5 @@
 - 첫번째 argument는 payload이고 두번째 argument는 해당 resolver의 variables이고 세번째 argument는 context이다. 
 - resolve는 사용자가 받는 update 알림의 형태를 바꿔주는일을 한다.
 - filter는 boolean값을 리턴해야하고 resolve는 subscription이 알려야하는걸 return하면 된다.
+- entity를 create할때는 save method가 create된 entity를 return한다. 
+- entity를 save할때는 entity 전체를 return하지 않는다.
