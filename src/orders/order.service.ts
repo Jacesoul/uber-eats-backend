@@ -1,4 +1,7 @@
-import { NEW_COOKED_ORDER } from './../common/common.constants';
+import {
+  NEW_COOKED_ORDER,
+  NEW_ORDER_UPDATE,
+} from './../common/common.constants';
 import { PubSub } from 'graphql-subscriptions';
 import { EditOrderInput, EditOrderOutput } from './dtos/edit-order.dto';
 import { GetOrderInput, GetOrderOutput } from './dtos/get-order.dto';
@@ -239,14 +242,16 @@ export class OrderService {
         id: orderId,
         status,
       });
+      const newOrder = { ...order, status };
       if (user.role === UserRole.Owner) {
         if (status === OrderStatus.Cooked) {
           await this.pubSub.publish(NEW_COOKED_ORDER, {
-            cookedOrders: { ...order, status },
+            cookedOrders: newOrder,
             // driver에게 이전 order를 새로운 status와 보내주게 된다.
           });
         }
       }
+      await this.pubSub.publish(NEW_ORDER_UPDATE, { orderUpdates: newOrder });
       return {
         ok: true,
       };

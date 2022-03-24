@@ -251,3 +251,5 @@
 - filter는 boolean값을 리턴해야하고 resolve는 subscription이 알려야하는걸 return하면 된다.
 - entity를 create할때는 save method가 create된 entity를 return한다. 
 - entity를 save할때는 entity 전체를 return하지 않는다.
+- eager relation은 db에서 entity를 load할 때마다 자동으로 load되는 relationship을 말한다.
+- eager relation을 사용할때 너무 많은걸 load하면 서버가 폭파한다. 
