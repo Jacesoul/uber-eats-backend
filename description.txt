@@ -264,3 +264,23 @@
 - OneToMany가 다른편에 없어도 ManyToOne을 생성할수 있다. 이것이 restaurant에 OneToMany를 만들지 않은 이유이다. restaurant이 갖고 있는 payments에 관심 없기 때문이다. 
 - eager relationship을 할때 주의할점은 pagination을 할수없다.
 - 또한 eager relationship과 작업하면 test하기가 어렵다. getPayments처럼 만들어서 resolver를 test하는게 좋다. 하나의 resolver가 모든것을 다 받는 구조면 무거워질 가능성이 크다.
+- Take scheduling은 원하는 time interval 또는 정해진 시간과 날짜에 function을 실행할수 있게 만든다.
+- nest.js/schedule은 node-cron이라는 패키지 위에 나온다. 
+- cron pattern의 의미 : *는 '매' 즉 '모든'것을 포함한다는 의미이다. 1-3,5의 의미는 1-3 또는 1-5를 의미한다. */2는 2씩 간격이라는 step을 의미한다. 
+* * * * * * 
+| | | | | |
+| | | | | day of week 
+| | | | month
+| | | day of month
+| | hour
+| minute
+second(optional)
+
+* * * * * * 매초마다
+45 * * * * * 매 45초에
+* 10 * * * * 매시 10분에  
+* */30 9-17 * * * 9-17시 사이의 매 30분마다
+* 30 11 * * 1-5 월요일-금요일 11시 30분에 
+
+- 매초, 매시, 매일을 스케쥴하고 싶다면 interval을 사용하면 된다.
+- timeout은 interval과 비슷한데 이건 나중에 발생한다. 또한 띡 1번만 실행한다.
