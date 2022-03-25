@@ -72,9 +72,13 @@ export class PaymentService {
     }
   }
 
-  @Cron('30 * * * * *')
+  @Cron('30 * * * * *', {
+    name: 'myJob',
+  })
   async checkForPayments() {
     console.log('Checking for payments...(CRON)');
+    const job = this.schedulerRegistry.getCronJob('myJob');
+    job.stop();
   }
 
   @Interval(10000)
