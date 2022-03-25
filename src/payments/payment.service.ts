@@ -1,3 +1,4 @@
+import { GetPaymentOutput } from './dtos/get-payment.dto';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import {
   CreatePaymentInput,
@@ -50,6 +51,21 @@ export class PaymentService {
       return {
         ok: false,
         error: 'Could not create payment',
+      };
+    }
+  }
+
+  async getPayments(user: User): Promise<GetPaymentOutput> {
+    try {
+      const payments = await this.paymentRepository.find({ user });
+      return {
+        ok: true,
+        payments,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not load payments',
       };
     }
   }
