@@ -51,6 +51,7 @@ export class RestaurantService {
       newRestaurant.owner = owner;
       const category = await this.categorytRepository.getOrCreate(
         createRestaurantInput.categoryName,
+        createRestaurantInput.coverImg,
       );
       newRestaurant.category = category;
       await this.restaurantRepository.save(newRestaurant);
@@ -90,6 +91,7 @@ export class RestaurantService {
       if (editRestaurantInput.categoryName) {
         category = await this.categorytRepository.getOrCreate(
           editRestaurantInput.categoryName,
+          editRestaurantInput.coverImg,
         );
       }
       await this.restaurantRepository.save([
