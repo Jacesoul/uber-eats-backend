@@ -181,11 +181,11 @@ export class RestaurantService {
         take: 25,
         skip: (page - 1) * 25,
       });
-      category.restaurants = restaurants;
       const totalResults = await this.countRestaurant(category);
       return {
         ok: true,
         category,
+        restaurants,
         totalPages: Math.ceil(totalResults / 25),
         totalResults,
       };
@@ -201,8 +201,8 @@ export class RestaurantService {
     try {
       const [results, totalResults] =
         await this.restaurantRepository.findAndCount({
-          skip: (page - 1) * 25,
-          take: 25,
+          skip: (page - 1) * 3,
+          take: 3,
           order: {
             isPromoted: 'DESC',
           },
@@ -210,7 +210,7 @@ export class RestaurantService {
       return {
         ok: true,
         results,
-        totalPages: Math.ceil(totalResults / 25),
+        totalPages: Math.ceil(totalResults / 3),
         totalResults,
       };
     } catch {
