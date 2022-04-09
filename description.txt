@@ -284,3 +284,14 @@ second(optional)
 
 - 매초, 매시, 매일을 스케쥴하고 싶다면 interval을 사용하면 된다.
 - timeout은 interval과 비슷한데 이건 나중에 발생한다. 또한 띡 1번만 실행한다.
+
+### UPLOADS FILES
+- npm install aws-sdk
+- S3는 AWS의 storage service이다. 
+- AWS IAM에 들어가서 사용자 추가 클릭 
+- 사용자이름 설정후 엑세스키에 체크하기 
+- 기존 정책 직접 연결 클릭후 S3 검색하기 
+- AmazonS3FullAccess클릭 후 권한 경계 없이 user 생성 선택 
+- 태그 추가 할 필요 없음
+- 사용자 만들기 클릭 
+- buffer는 byte형식의 파일이다. key는 파일의 이름이다.
