@@ -1,3 +1,4 @@
+import { MyRestaurantsOutput } from './dtos/my-restaurants.dto';
 import { DeleteDishInput } from './dtos/delete-dish.dto';
 import { EditDishInput, EditDishOutput } from './dtos/edit-dish.dto';
 import { CreateDishInput, CreateDishOutput } from './dtos/create-dish.dto';
@@ -370,6 +371,21 @@ export class RestaurantService {
       return {
         ok: false,
         error: 'Could not delete dish',
+      };
+    }
+  }
+
+  async myRestaurants(owner: User): Promise<MyRestaurantsOutput> {
+    try {
+      const restaurants = await this.restaurantRepository.find({ owner });
+      return {
+        restaurants,
+        ok: true,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not find restaurants.',
       };
     }
   }
