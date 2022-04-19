@@ -30,6 +30,7 @@ import { CategoryRepository } from './repositories/category.repository';
 import { CategoryInput, CategoryOutput } from './dtos/category.dto';
 import { RestaurantsInput, RestaurantsOutput } from './dtos/restaurants.dto';
 import { Dish } from './entities/dish.entity';
+import { MyRestaurantInput } from './dtos/my-restaurant';
 
 @Injectable()
 export class RestaurantService {
@@ -381,6 +382,21 @@ export class RestaurantService {
       const restaurants = await this.restaurantRepository.find({ owner });
       return {
         restaurants,
+        ok: true,
+      };
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not find restaurants.',
+      };
+    }
+  }
+
+  async myRestaurant(owner: User, { id }: MyRestaurantInput) {
+    try {
+      const restaurant = await this.restaurantRepository.findOne({ owner, id });
+      return {
+        restaurant,
         ok: true,
       };
     } catch {

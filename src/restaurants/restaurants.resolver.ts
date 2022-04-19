@@ -37,6 +37,7 @@ import {
   SerachRestaurantInput,
 } from './dtos/search-restaurant.dto';
 import { CreateDishOutput, CreateDishInput } from './dtos/create-dish.dto';
+import { MyRestaurantOutput, MyRestaurantInput } from './dtos/my-restaurant';
 
 @Resolver((of) => Restaurant)
 export class RestaurantResolver {
@@ -58,6 +59,15 @@ export class RestaurantResolver {
   @Role(['Owner'])
   myRestaurants(@AuthUser() owner: User): Promise<MyRestaurantsOutput> {
     return this.restaurantService.myRestaurants(owner);
+  }
+
+  @Query((returns) => MyRestaurantOutput)
+  @Role(['Owner'])
+  myRestaurant(
+    @AuthUser() owner: User,
+    @Args('input') myRestaurantInput: MyRestaurantInput,
+  ): Promise<MyRestaurantOutput> {
+    return this.restaurantService.myRestaurant(owner, myRestaurantInput);
   }
 
   @Mutation((returns) => EditRestaurantOutput)
