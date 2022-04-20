@@ -394,7 +394,11 @@ export class RestaurantService {
 
   async myRestaurant(owner: User, { id }: MyRestaurantInput) {
     try {
-      const restaurant = await this.restaurantRepository.findOne({ owner, id });
+      const restaurant = await this.restaurantRepository.findOne(
+        { owner, id },
+        { relations: ['menu'] },
+      );
+      console.log(restaurant);
       return {
         restaurant,
         ok: true,
