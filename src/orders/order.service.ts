@@ -55,20 +55,22 @@ export class OrderService {
           };
         }
         let dishFinalPrice = dish.price;
-        for (const itemOption of item.options) {
-          const dishOption = dish.options.find(
-            (dishOption) => dishOption.name === itemOption.name,
-          );
-          if (dishOption) {
-            if (dishOption.extra) {
-              dishFinalPrice += dishOption.extra;
-            } else {
-              const dishOptionChoice = dishOption.choices.find(
-                (optionChoice) => optionChoice.name === itemOption.choice,
-              );
-              if (dishOptionChoice) {
-                if (dishOptionChoice.extra) {
-                  dishFinalPrice += dishOptionChoice.extra;
+        if (item.options) {
+          for (const itemOption of item.options) {
+            const dishOption = dish.options.find(
+              (dishOption) => dishOption.name === itemOption.name,
+            );
+            if (dishOption) {
+              if (dishOption.extra || dishOption.extra >= 0) {
+                dishFinalPrice += dishOption.extra;
+              } else {
+                const dishOptionChoice = dishOption.choices.find(
+                  (optionChoice) => optionChoice.name === itemOption.choice,
+                );
+                if (dishOptionChoice) {
+                  if (dishOptionChoice.extra) {
+                    dishFinalPrice += dishOptionChoice.extra;
+                  }
                 }
               }
             }
