@@ -396,7 +396,7 @@ export class RestaurantService {
     try {
       const restaurant = await this.restaurantRepository.findOne(
         { owner, id },
-        { relations: ['menu'] },
+        { relations: ['menu', 'orders'] },
       );
       console.log(restaurant);
       return {
