@@ -64,7 +64,7 @@ export class OrderService {
               if (dishOption.extra || dishOption.extra >= 0) {
                 dishFinalPrice += dishOption.extra;
               } else {
-                const dishOptionChoice = dishOption.choices.find(
+                const dishOptionChoice = dishOption.choices?.find(
                   (optionChoice) => optionChoice.name === itemOption.choice,
                 );
                 if (dishOptionChoice) {
@@ -98,8 +98,10 @@ export class OrderService {
       });
       return {
         ok: true,
+        orderId: order.id,
       };
-    } catch {
+    } catch (e) {
+      console.log(e);
       return {
         ok: false,
         error: 'Could not create order',
