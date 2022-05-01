@@ -44,14 +44,23 @@ import { UploadsModule } from './uploads/uploads.module';
       }),
     }),
     GraphQLModule.forRoot({
-      subscriptions: {
-        'subscriptions-transport-ws': {
-          onConnect: (connectionParams: any) => {
-            return connectionParams;
-          },
-        },
-      },
+      installSubscriptionHandlers: true,
       autoSchemaFile: true,
+      context: ({ req, connection }) => {
+        const TOKEN_KEY = 'x-jwt';
+        console.log('connection', connection?.context[TOKEN_KEY]);
+        console.log('req.headers', req.headers[TOKEN_KEY]);
+        return {
+          token: req ? req.headers[TOKEN_KEY] : connection.context[TOKEN_KEY],
+        };
+      },
+      // subscriptions: {
+      //   'subscriptions-transport-ws': {
+      //     onConnect: (connectionParams: any) => {
+      //       return connectionParams;
+      //     },
+      //   },
+      // },
     }),
     RestaurantsModule,
     TypeOrmModule.forRoot({
