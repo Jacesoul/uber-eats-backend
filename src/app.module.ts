@@ -44,35 +44,34 @@ import { Context } from 'apollo-server-core';
         AWS_SECRET_KEY: Joi.string().required(),
       }),
     }),
-    GraphQLModule.forRoot({
-      installSubscriptionHandlers: true,
-      autoSchemaFile: true,
-      context: ({ req, connection }) => {
-        const TOKEN_KEY = 'x-jwt';
-        return {
-          token: req ? req.headers[TOKEN_KEY] : connection.context[TOKEN_KEY],
-        };
-      },
-    }),
     // GraphQLModule.forRoot({
-    //   subscriptions: {
-    //     'graphql-ws': {
-    //       onConnect: (context: Context<any>) => {
-    //         const { connectionParams, extra } = context;
-    //         extra.token = connectionParams['x-jwt'];
-    //       },
-    //     },
-    //   },
+    //   installSubscriptionHandlers: true,
     //   autoSchemaFile: true,
-    //   context: ({ req, extra }) => {
-    //     console.log('extra', extra);
-    //     if (extra) {
-    //       return { token: extra.token };
-    //     } else {
-    //       return { token: req.headers['x-jwt'] };
-    //     }
+    //   context: ({ req, connection }) => {
+    //     const TOKEN_KEY = 'x-jwt';
+    //     return {
+    //       token: req ? req.headers[TOKEN_KEY] : connection.context[TOKEN_KEY],
+    //     };
     //   },
     // }),
+    GraphQLModule.forRoot({
+      subscriptions: {
+        'graphql-ws': {
+          onConnect: (context: Context<any>) => {
+            const { connectionParams, extra } = context;
+            extra.token = connectionParams['x-jwt'];
+          },
+        },
+      },
+      autoSchemaFile: true,
+      context: ({ req, extra }) => {
+        if (extra) {
+          return { token: extra.token };
+        } else {
+          return { token: req.headers['x-jwt'] };
+        }
+      },
+    }),
     RestaurantsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
