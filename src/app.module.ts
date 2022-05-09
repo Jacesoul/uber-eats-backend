@@ -2,7 +2,7 @@ import { OrderItem } from './orders/entities/order-item.entity';
 import { Module } from '@nestjs/common';
 import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLModule, Subscription } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { Restaurant } from './restaurants/entities/restaurant.entity';
@@ -21,6 +21,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { Payment } from './payments/entities/payment.entity';
 import { ScheduleModule } from '@nestjs/schedule';
 import { UploadsModule } from './uploads/uploads.module';
+import { Context } from 'apollo-server-core';
 
 @Module({
   imports: [
@@ -48,20 +49,30 @@ import { UploadsModule } from './uploads/uploads.module';
       autoSchemaFile: true,
       context: ({ req, connection }) => {
         const TOKEN_KEY = 'x-jwt';
-        console.log('connection', connection?.context[TOKEN_KEY]);
-        console.log('req.headers', req.headers[TOKEN_KEY]);
         return {
           token: req ? req.headers[TOKEN_KEY] : connection.context[TOKEN_KEY],
         };
       },
-      // subscriptions: {
-      //   'subscriptions-transport-ws': {
-      //     onConnect: (connectionParams: any) => {
-      //       return connectionParams;
-      //     },
-      //   },
-      // },
     }),
+    // GraphQLModule.forRoot({
+    //   subscriptions: {
+    //     'graphql-ws': {
+    //       onConnect: (context: Context<any>) => {
+    //         const { connectionParams, extra } = context;
+    //         extra.token = connectionParams['x-jwt'];
+    //       },
+    //     },
+    //   },
+    //   autoSchemaFile: true,
+    //   context: ({ req, extra }) => {
+    //     console.log('extra', extra);
+    //     if (extra) {
+    //       return { token: extra.token };
+    //     } else {
+    //       return { token: req.headers['x-jwt'] };
+    //     }
+    //   },
+    // }),
     RestaurantsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
