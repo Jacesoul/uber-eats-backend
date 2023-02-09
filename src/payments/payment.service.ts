@@ -77,7 +77,7 @@ export class PaymentService {
     }
   }
 
-  @Interval(10000)
+  // @Interval(10000)
   async checkPromotedRestaurants() {
     const restaurants = await this.restaurantRepository.find({
       isPromoted: true,

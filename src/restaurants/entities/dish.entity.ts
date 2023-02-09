@@ -2,7 +2,7 @@ import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsNumber, IsString, Length } from 'class-validator';
-import { Column, Entity, ManyToOne, OneToMany, RelationId } from 'typeorm';
+import { Column, Entity, ManyToOne, RelationId } from 'typeorm';
 
 @InputType('DishChoiceInputType', { isAbstract: true })
 @ObjectType()
